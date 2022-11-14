@@ -34,4 +34,9 @@ public class ShopManager : MonoBehaviour
         _speedDisplay.text = string.Format("{0:N1}", _playerParameters._playerSpeed);
         _damageDisplay.text = string.Format("{0:N1}", _playerParameters._playerDamage);
     }
+
+    public void ShowUI(bool active)
+    {
+
+    }
 }

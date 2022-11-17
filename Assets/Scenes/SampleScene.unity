@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 170567371}
   - component: {fileID: 170567373}
   - component: {fileID: 170567372}
+  - component: {fileID: 170567374}
   m_Layer: 5
   m_Name: Damage Display
   m_TagString: Untagged
@@ -393,6 +394,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170567370}
   m_CullTransparentMesh: 1
+--- !u!114 &170567374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170567370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd50a9ab91819804d81a43311b58f365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parametersScriptableObj: {fileID: 11400000, guid: 71223e22ca4e2c44fa7d011ce87c5a4e, type: 2}
+  _parameterEnum: 1
 --- !u!1 &240391535
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,9 +543,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ceea39d8f210d546857ceee3b8e5ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerParameters: {fileID: 11400000, guid: 71223e22ca4e2c44fa7d011ce87c5a4e, type: 2}
+  _parametersScriptableObj: {fileID: 11400000, guid: 71223e22ca4e2c44fa7d011ce87c5a4e, type: 2}
   _parameterEnum: 1
-  _parameterDisplay: {fileID: 170567372}
 --- !u!1 &305385939
 GameObject:
   m_ObjectHideFlags: 0
@@ -1167,9 +1181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ceea39d8f210d546857ceee3b8e5ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerParameters: {fileID: 11400000, guid: 71223e22ca4e2c44fa7d011ce87c5a4e, type: 2}
+  _parametersScriptableObj: {fileID: 11400000, guid: 71223e22ca4e2c44fa7d011ce87c5a4e, type: 2}
   _parameterEnum: 0
-  _parameterDisplay: {fileID: 1689752831}
 --- !u!1 &1129812674
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,6 +1384,7 @@ GameObject:
   - component: {fileID: 1689752830}
   - component: {fileID: 1689752832}
   - component: {fileID: 1689752831}
+  - component: {fileID: 1689752833}
   m_Layer: 5
   m_Name: Speed Display
   m_TagString: Untagged
@@ -1495,6 +1509,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689752829}
   m_CullTransparentMesh: 1
+--- !u!114 &1689752833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689752829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd50a9ab91819804d81a43311b58f365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parametersScriptableObj: {fileID: 11400000, guid: 71223e22ca4e2c44fa7d011ce87c5a4e, type: 2}
+  _parameterEnum: 0
 --- !u!1 &1708885793
 GameObject:
   m_ObjectHideFlags: 0

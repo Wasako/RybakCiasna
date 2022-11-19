@@ -44,9 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25eab98c16e23284dad2d0ee48ccb586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrainTilemap: {fileID: 3352128907375456524, guid: 51c6597c3bcffea44a8a7536ce6315cb, type: 3}
-  filled: {fileID: 0}
+  terrainTilemap: {fileID: 0}
+  rockTile: {fileID: 11400000, guid: d03d9fd788c1dd44685dd6a9eb59455c, type: 2}
+  oreTile: {fileID: 11400000, guid: 88dcf1855b793944b862183673af8120, type: 2}
+  plantTile: {fileID: 11400000, guid: c8f152123efbed745bd63a51bc21d3e6, type: 2}
   width: 10
-  height: -50
+  height: 10
   smoothness: 20
-  fillBorder: 50
+  rockBorder: 40
+  oreBorder: 50

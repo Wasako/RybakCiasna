@@ -8,25 +8,28 @@ public class TerrainGeneration : MonoBehaviour
     // fields that are relevant to config of generation 
     [Header("Tilemap options")]
     [SerializeField] Tilemap terrainTilemap;
-    [SerializeField] Tile filled;
+    [SerializeField] Tile rockTile, oreTile, plantTile;
 
     [Header("Size of generated map")]
-    [Range(0, 1000)][SerializeField] int width = 1;
-    [Range(0, 1000)][SerializeField] int height = 1;
+    [Range(0, 1000)][SerializeField] int width = 10;
+    [Range(0, 1000)][SerializeField] int height = 10;
 
     [Header("Generation options")]
     [Tooltip("small - big chunks")][SerializeField] float smoothness = 20f;
-    [Tooltip("small - more filled")][SerializeField] int fillBorder = 50;
+    [Range(0, 100)][Tooltip("small - more filled")][SerializeField] int rockBorder = 40;
+    [Range(0, 100)][Tooltip("small - more filled")][SerializeField] int oreBorder = 50;
+    [Range(0, 100)][SerializeField] int plantChance = 50;
 
     float seed; // should not be visible or changeable
 
     void Start()
     {
         // generate terrain, if none is generated yet
-        if (!terrainTilemap.ContainsTile(filled)) {
+        if (!terrainTilemap.ContainsTile(rockTile)) {
             seed = Random.Range(-1000000, 1000000);
             GenerateTerrain();
         }
+        
     }
 
     private void Update()
@@ -60,10 +63,21 @@ public class TerrainGeneration : MonoBehaviour
             for (int y = height*-1; y < 0; y++)
             {
                 // calls the perlin noise function, and if output is larger than some threshold,
-                // fills in the tile
-                if (Perlin(x, y) > fillBorder)
+                // fills in the corresponding tile
+                int _perlinOutput = Perlin(x,y);
+
+
+                if (_perlinOutput > rockBorder && _perlinOutput < oreBorder)
                 {
-                    terrainTilemap.SetTile(new Vector3Int(x, y, 0), filled);
+                    terrainTilemap.SetTile(new Vector3Int(x, y, 0), rockTile);
+                }
+                else if (_perlinOutput > oreBorder)
+                {
+                    terrainTilemap.SetTile(new Vector3Int(x, y, 0), oreTile);
+                }
+                else if (terrainTilemap.GetTile(new Vector3Int(x, y-1, 0)) == rockTile && Random.Range(0, 101) < plantChance)
+                {
+                    terrainTilemap.SetTile(new Vector3Int(x, y-1, 0), plantTile);   
                 }
             }
         }

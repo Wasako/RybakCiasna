@@ -44,8 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25eab98c16e23284dad2d0ee48ccb586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 10
-  height: 5
-  terrainTilemap: {fileID: 0}
+  terrainTilemap: {fileID: 3352128907375456524, guid: 51c6597c3bcffea44a8a7536ce6315cb, type: 3}
   filled: {fileID: 0}
-  empty: {fileID: 0}
+  width: 10
+  height: -50
+  smoothness: 20
+  fillBorder: 50

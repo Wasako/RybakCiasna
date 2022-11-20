@@ -5,10 +5,13 @@ public class MoneyDisplay : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _moneyDisplay;
 
-    private void Awake()
+    private void Start()
     {
-
+        Inventory.Instance.MoneyUpdated += DisplayUpdate;
+        DisplayUpdate();
     }
 
-    private void MoneyUpdate(object sender, System.EventArgs e) {}
+    private void DisplayUpdate() => _moneyDisplay.text = Inventory.Instance.Money.ToString();
+
+    private void DisplayUpdate(object sender, System.EventArgs e) => DisplayUpdate();
 }

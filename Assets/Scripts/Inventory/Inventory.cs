@@ -5,6 +5,7 @@ public class Inventory : MonoBehaviour
     public event System.EventHandler MoneyUpdated;
     public static Inventory Instance;
     private int _money = 50;
+    public int Money => _money;
 
     private void Awake()
     {
@@ -21,7 +22,7 @@ public class Inventory : MonoBehaviour
     {
         if (_money < cost) return false;
         _money -= cost;
-        MoneyUpdated.Invoke(this, System.EventArgs.Empty);
+        MoneyUpdated?.Invoke(this, System.EventArgs.Empty);
         return true;
     }
 }

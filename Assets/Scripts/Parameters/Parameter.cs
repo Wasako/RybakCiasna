@@ -29,7 +29,7 @@ public class Parameter
         if (!Inventory.Instance.TryBuy(_upgradeCost)) return;
 
         Level = Mathf.Min(Level + 1, _maxUpgrade);
-        ParameterUpdated.Invoke(this, System.EventArgs.Empty);
+        ParameterUpdated?.Invoke(this, System.EventArgs.Empty);
     }
 
     // Resets parameter to the default value

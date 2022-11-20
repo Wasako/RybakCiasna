@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ea1cd10aa672b408c3288bf6ac4b15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  harpoonRange: 0.1
+  harpoonRange: 0.2
 --- !u!50 &8262048444768906205
 Rigidbody2D:
   serializedVersion: 4

@@ -11,7 +11,7 @@ public class MoneyDisplay : MonoBehaviour
         DisplayUpdate();
     }
 
-    private void DisplayUpdate() => _moneyDisplay.text = Inventory.Instance.Money.ToString();
+    private void DisplayUpdate() => _moneyDisplay.text = Inventory.Instance.money.ToString();
 
     private void DisplayUpdate(object sender, System.EventArgs e) => DisplayUpdate();
 }

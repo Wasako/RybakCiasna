@@ -11,6 +11,7 @@ public class Parameter
         PlayerDamage,
         DrillSpeed,
         O2Capacity,
+        InventorySpace,
         Total
     }
     [SerializeField] private AnimationCurve _progressionFunction = AnimationCurve.Linear(0f, 0f, 1f, 1f);

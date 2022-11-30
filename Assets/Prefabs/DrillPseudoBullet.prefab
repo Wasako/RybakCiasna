@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7786576538524012816}
-  - component: {fileID: 7232768902187503708}
   - component: {fileID: 8262048444768906205}
-  - component: {fileID: 5829661602536150567}
-  m_Layer: 0
+  - component: {fileID: 3901400750928462305}
+  - component: {fileID: 9149243771317509927}
+  m_Layer: 7
   m_Name: DrillPseudoBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,19 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7232768902187503708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893791180528774847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82ea1cd10aa672b408c3288bf6ac4b15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  harpoonRange: 0.2
 --- !u!50 &8262048444768906205
 Rigidbody2D:
   serializedVersion: 4
@@ -66,10 +53,28 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &5829661602536150567
-BoxCollider2D:
+--- !u!114 &3901400750928462305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893791180528774847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 002d5cf441c2af545afcbf51404588ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  damageType: 
+  attackRate: 0
+  malee: 0
+  lastAttackTime: 0
+  harpoonRange: 0.2
+--- !u!58 &9149243771317509927
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -82,15 +87,5 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.08577752, y: 0.073504925}
-  m_EdgeRadius: 0
+  m_Radius: 0.05

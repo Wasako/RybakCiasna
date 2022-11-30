@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2048915542731163671}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.69, y: -0.59, z: 0}
+  m_LocalPosition: {x: -0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 2048915543026696956}
   - component: {fileID: 2048915543026696959}
   - component: {fileID: -8146405079465053328}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -401,7 +401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 2048915542731163668}
   harpoonPrefab: {fileID: 893791180528774847, guid: 923fb707b174d524fa889ea4bc594dce, type: 3}
-  shootingPower: 5
+  shootingPower: 7
 --- !u!1 &2048915543589148561
 GameObject:
   m_ObjectHideFlags: 0

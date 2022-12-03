@@ -147,7 +147,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_terrain_ore
+      name: tiles_terrain_iron
       rect:
         serializedVersion: 2
         x: 0
@@ -168,7 +168,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles_terrain_3
+      name: tiles_terrain_gold
       rect:
         serializedVersion: 2
         x: 16
@@ -200,9 +200,9 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       tiles_terrain_rock: -1632313809
-      tiles_terrain_ore: 969825911
+      tiles_terrain_iron: 969825911
       tiles_terrain_plant: 375233680
-      tiles_terrain_3: 105337728
+      tiles_terrain_gold: 105337728
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

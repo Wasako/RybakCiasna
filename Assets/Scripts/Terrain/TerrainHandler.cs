@@ -5,6 +5,9 @@ using UnityEngine.Tilemaps;
 
 public class TerrainHandler : MonoBehaviour
 {
+    [SerializeField] private Tile oreItemTile;
+    [SerializeField] private ItemScriptableObject oreItem;
+
     // arguments: collision with a tilemap collider
     // returns: true if a tile has been broken, false if no tilemap or no tile at position
     public bool BreakTile(Collision2D collision)
@@ -42,6 +45,13 @@ public class TerrainHandler : MonoBehaviour
                 return false;
             }
         }
+
+        //chujowy sposób na robienie tego, naprawię
+        if(_tilemap.GetTile(_gridPosition) == oreItemTile)
+        {
+            FindObjectOfType<Inventory>().TryAddItem(oreItem);
+            FindObjectOfType<Inventory>().PrintInventory();
+        }
         
         // to set the tile in the tilemap to null - no sprite & collision
         _tilemap.SetTile(_gridPosition, null);
@@ -49,8 +59,4 @@ public class TerrainHandler : MonoBehaviour
 
     }
 
-    /* public void AddMaterialToInventory ()
-    {
-
-    } */
 }

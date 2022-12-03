@@ -5,10 +5,10 @@ using UnityEngine.Tilemaps;
 
 public class TerrainHandler : MonoBehaviour
 {
-    [SerializeField] private Tile oreItemTile;
-    [SerializeField] private ItemScriptableObject oreItem;
 
     private Tilemap thisTilemap;
+    private Dictionary<TileBase, ItemScriptableObject> dropTable = new();
+    
 
     private void Start() {
         // this tilemap component
@@ -19,6 +19,19 @@ public class TerrainHandler : MonoBehaviour
         {
             Debug.LogWarning("No tilemap found on this gameObject");
         }
+
+        // load the SO that contains info about blocks
+        BlockTableScriptableObject tempDropTable = Resources.Load("Terrain/TerrainBlocksTable") as BlockTableScriptableObject;
+
+        // populate the drop table
+        foreach (BlockScriptableObject block in tempDropTable.blockTable)
+        {
+            dropTable.Add(block.tile, block.itemDrop);
+            // Debug.Log(block.tile + " " + block.itemDrop);
+        }
+        
+        // unload to save memory or sth idk
+        Resources.UnloadAsset(tempDropTable);
     }
 
     // arguments: collision with a tilemap collider
@@ -35,7 +48,6 @@ public class TerrainHandler : MonoBehaviour
 
         AddToInventory(thisTilemap.GetTile(_gridPosition));
 
-        
         // to set the tile in the tilemap to null - no sprite & collision
         thisTilemap.SetTile(_gridPosition, null);
         return true;
@@ -81,13 +93,9 @@ public class TerrainHandler : MonoBehaviour
 
     private void AddToInventory(TileBase brokenTile)
     {
-
-        
-
-        //chujowy sposób na robienie tego, naprawię
-        if(brokenTile == oreItemTile)
+        if (dropTable[brokenTile] != null)
         {
-            FindObjectOfType<Inventory>().TryAddItem(oreItem);
+            FindObjectOfType<Inventory>().TryAddItem(dropTable[brokenTile]);
             FindObjectOfType<Inventory>().PrintInventory();
         }
     }

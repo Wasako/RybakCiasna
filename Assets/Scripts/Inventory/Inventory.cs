@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] private ParametersScriptableObject _parametersScriptableObj;
     private Parameter _inventorySpaceParameter;
-    private Dictionary<ItemScriptableObject, int> _itemsCount = new();
+    public Dictionary<ItemScriptableObject, int> _itemsCount = new();
     public int money { get; private set; } = 50;
 
     // Pays money if there is sufficient amount

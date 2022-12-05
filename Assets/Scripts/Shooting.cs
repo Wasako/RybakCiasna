@@ -6,13 +6,17 @@ public class Shooting : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject harpoonPrefab;
+    public float fireRate;
+
+    private float nextTimeToFire = 0f;
 
     public float shootingPower = 20f;
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
         {
+            nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();
         }
     }

@@ -1,19 +1,10 @@
 using UnityEngine;
 
 
-[System.Serializable]
-public class Parameter
+[CreateAssetMenu(fileName = "ParameterScriptableObject")]
+public class ParameterScriptableObject : ScriptableObject
 {
     public event System.EventHandler ParameterUpdated;
-    public enum Types
-    {
-        PlayerSpeed,
-        PlayerDamage,
-        DrillSpeed,
-        O2Capacity,
-        InventorySpace,
-        Total
-    }
     [SerializeField] private AnimationCurve _progressionFunction = AnimationCurve.Linear(0f, 0f, 1f, 1f);
     [SerializeField] private int _maxUpgrade = 1;
     [SerializeField] private int _upgradeCost;

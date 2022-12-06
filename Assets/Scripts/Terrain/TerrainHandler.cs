@@ -34,28 +34,28 @@ public class TerrainHandler : MonoBehaviour
         }
         
         // unload to save memory or sth idk
-        // Resources.UnloadAsset(tempDropTable);
+        Resources.UnloadAsset(tempDropTable);
     }
 
     // arguments: collision with a tilemap collider
     // returns: true if a tile has been broken, false if no tilemap or no tile at position
     public bool DamageTile(Collision2D collision)
     {
+
         TryFindTileFromCollision(collision, out bool isFound, out currentPosition);
-        
+
         if (!isFound) {
             return false;
         }
 
         if (currentPosition != previousPosition)
         {
-            Debug.Log("new tile");
+            // Debug.Log("new tile");
             currentHealth = thisTilemap.GetTile<BreakableTile>(currentPosition).health;
-            previousPosition = currentPosition;
         }
 
-        Debug.Log(currentHealth);
-        
+        // Debug.Log(currentHealth);
+        previousPosition = currentPosition;
         currentHealth -= tempDrillPower;
 
         if (currentHealth <= 0)

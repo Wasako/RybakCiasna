@@ -6,27 +6,13 @@ using UnityEngine.Tilemaps;
 public class BreakableTile : Tile
 {
     public int health;
+    public int generationMethod; // 1 - from noise with border, 2 - by chance, 3 - plant
+    public float generationValue; // chance
+    // public int minDepth, maxDepth;
 
-    public override bool StartUp(Vector3Int location, ITilemap tilemap, GameObject go)
+    /* public override bool StartUp(Vector3Int location, ITilemap tilemap, GameObject go)
     {
         return true;
-    }
-
-    // return 1 if tile gets broken, 0 if doesnt
-    /* public bool MineBlock(int damage)
-    {
-        // Debug.Log(health);
-
-        health -= damage;
-
-        if (health <=0)
-        {
-            health = 0;
-            // Debug.Log("mined");
-            return true;
-        }
-        // Debug.Log("notmined");
-        return false;
     } */
 
     #if UNITY_EDITOR

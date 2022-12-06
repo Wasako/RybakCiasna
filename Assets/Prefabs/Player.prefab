@@ -145,6 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 2048915543589148574}
   harpoonPrefab: {fileID: 5069830944409648793, guid: cc87d81235590344693e4a2ef763e60c, type: 3}
+  fireRate: 2
   shootingPower: 30
 --- !u!1 &2048915543026696958
 GameObject:
@@ -401,7 +402,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 2048915542731163668}
   harpoonPrefab: {fileID: 893791180528774847, guid: 923fb707b174d524fa889ea4bc594dce, type: 3}
-  shootingPower: 7
+  fireRate: 5
+  shootingPower: 5
 --- !u!1 &2048915543589148561
 GameObject:
   m_ObjectHideFlags: 0

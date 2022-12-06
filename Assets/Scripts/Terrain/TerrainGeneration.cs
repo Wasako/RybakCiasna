@@ -6,50 +6,89 @@ using UnityEngine.Tilemaps;
 // This script handles the generation of terrain, settings for it,
 // and control of it from the inspector
 
+// to do: design the generation algorithm on paper, including:
+// tile generation types, level - depth relationship, correct ammounts of tiles per depth level, generation chances, multiple type 2 and 3 tiles, ...
+// bruh
+// to sie wkopałam w algorytmikę
+
+// this is a mess I will fix it
+
 public class TerrainGeneration : MonoBehaviour
 {
     // fields that are relevant to config of generation 
     [Header("Tilemap options")]
-    [SerializeField] Tilemap terrainTilemap;
-    [SerializeField] Tile rockTile, oreTile, plantTile, goldTile;
+    [SerializeField] private Tilemap terrainTilemap;
+    [SerializeField] BreakableTile rockTile, oreTile, plantTile, goldTile;
 
     [Header("Size of generated map")]
-    [Range(0, 1000)][SerializeField] int width = 10;
-    [Range(0, 1000)][SerializeField] int height = 10;
+    [Range(0, 1000)][SerializeField] private int width = 10;
+    [Range(0, 1000)][SerializeField] private int height = 10;
 
     [Header("Generation options")]
-    [Tooltip("small - big chunks")][SerializeField] float smoothness = 20f;
-    [Range(0, 100)][Tooltip("small - more filled")][SerializeField] int rockBorder = 40;
-    [Range(0, 100)][Tooltip("small - more filled")][SerializeField] int oreBorder = 50;
-    [Range(0, 100)][Tooltip("small - more filled")][SerializeField] int goldBorder = 60;
-    [Range(0, 100)][SerializeField] int plantChance = 50;
+    [Tooltip("small - big chunks")][SerializeField] private float smoothness = 20f;
+    [Range(0, 100)][Tooltip("small - more filled")][SerializeField] private int rockBorder = 40;
+    [Range(0, 100)][Tooltip("small - more filled")][SerializeField] private int resourceBorder1 = 50;
+    
+    // [Range(0, 100)][Tooltip("small - more filled")][SerializeField] private int resourceBorder2 = 60;
+    // [Range(0, 100)][SerializeField] int plantChance = 50;
 
     float seed; // should not be visible or changeable
 
-    // private Dictionary<TileBase, ItemScriptableObject> dropTable = new();
+    private List<TileBase> type1Tiles = new();
+    private List<BreakableTile> type2Tiles = new();
+    private List<BreakableTile> type3Tiles = new();
 
-    // do przepisania!! z użyciem SO czy tam innych rzeczy
 
-
-    void Start()
+    private void Start()
     {
-        /*
+        /* 
         // load the SO that contains info about blocks
-        BlockTableScriptableObject tempDropTable = Resources.Load("TerrainBlocksTable") as BlockTableScriptableObject;
+        BlockTableScriptableObject tempTileTable = Resources.Load("TerrainBlocksTable") as BlockTableScriptableObject;
 
-        // populate the drop table
-        foreach (BlockScriptableObject block in tempDropTable.blockTable)
+        // populate the tables
+        foreach (BlockScriptableObject block in tempTileTable.blockTable)
         {
-            dropTable.Add(block.tile, block.itemDrop);
-            // Debug.Log(block.tile + " " + block.itemDrop);
+            switch (block.tile.generationMethod)
+            {
+                case 1:
+                    type1Tiles.Add(block.tile);
+                    Debug.Log("type 1 " + block.tile.name);
+                    break;
+
+                case 2:
+                    type2Tiles.Add(block.tile);
+                    Debug.Log("type 2 " + block.tile.name);
+
+                    break;
+
+                case 3:
+                    type3Tiles.Add(block.tile);
+                    Debug.Log("type 3 " + block.tile.name);
+
+                    break;
+
+                default:
+                    Debug.Log("tile does not have generation method: " + block.tile.name);
+                    break;
+            }
         } 
+        
+        // unload when not needed
+        Resources.UnloadAsset(tempTileTable);
+
+
+        // make this better when I figure out depth levels
+        if (type1Tiles.Count > 3)
+        {
+            Debug.LogWarning("too many resource blocks");
+        }
          */
     }
 
     private void Update()
     {
         // keys to quickly generate, clear terrain
-        if (Input.GetKeyDown(KeyCode.I))
+        /* if (Input.GetKeyDown(KeyCode.I))
         {
             ButtonNewTerrain();
         }
@@ -60,7 +99,7 @@ public class TerrainGeneration : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             ButtonClearTerrain();
-        }
+        } */
     }
 
     private void OnDrawGizmos() {
@@ -71,7 +110,7 @@ public class TerrainGeneration : MonoBehaviour
     
     public void GenerateTerrain()
     {
-        // iterates through all tiles in defined area
+        // first iteration - blocks generated from Perin noise
         for (int x = 0; x < width; x++)
         {
             for (int y = height*-1; y < 0; y++)
@@ -80,23 +119,47 @@ public class TerrainGeneration : MonoBehaviour
                 // fills in the corresponding tile
                 int _perlinOutput = Perlin(x,y);
 
-
-                if (_perlinOutput > rockBorder && _perlinOutput <= oreBorder)
+                /* if (_perlinOutput > resourceBorder2 && type1Tiles[2] != null)
                 {
-                    terrainTilemap.SetTile(new Vector3Int(x, y, 0), rockTile);
+                    terrainTilemap.SetTile(new Vector3Int(x, y, 0), type1Tiles[2]);
                 }
-                else if (_perlinOutput > oreBorder && _perlinOutput <= goldBorder)
+                else */  
+                
+                if (_perlinOutput > resourceBorder1)
                 {
                     terrainTilemap.SetTile(new Vector3Int(x, y, 0), oreTile);
                 }
-                else if (_perlinOutput > goldBorder)
+                else if (_perlinOutput > rockBorder)
                 {
-                    terrainTilemap.SetTile(new Vector3Int(x, y, 0), goldTile);
+                    terrainTilemap.SetTile(new Vector3Int(x, y, 0), rockTile);
                 }
-                else if (terrainTilemap.GetTile(new Vector3Int(x, y-1, 0)) == rockTile && Random.Range(0, 101) < plantChance)
+            }
+        }
+
+        // second iteration - generated by chance
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = height*-1; y < 0; y++)
+            {
+                if (terrainTilemap.GetTile(new Vector3Int(x, y, 0)) == rockTile )
                 {
-                    terrainTilemap.SetTile(new Vector3Int(x, y-1, 0), plantTile);   
+                    // plants
+                    if (terrainTilemap.GetTile(new Vector3Int(x, y, 0)) == rockTile && 
+                        terrainTilemap.GetTile(new Vector3Int(x, y+1, 0)) == null && 
+                        Random.Range(0, 101) < plantTile.generationValue)
+                    {
+                        terrainTilemap.SetTile(new Vector3Int(x, y, 0), plantTile);
+                    }
+
+                    // gems
+                    if ((terrainTilemap.GetTile(new Vector3Int(x, y, 0)) == rockTile || 
+                        terrainTilemap.GetTile(new Vector3Int(x, y, 0)) == oreTile) &&
+                        Random.Range(0, 101) < goldTile.generationValue)
+                    {
+                        terrainTilemap.SetTile(new Vector3Int(x, y, 0), goldTile);
+                    }
                 }
+
             }
         }
     }

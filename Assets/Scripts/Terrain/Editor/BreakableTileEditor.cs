@@ -9,12 +9,16 @@ public class BreakableTileEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        BreakableTile tile = target as BreakableTile;
+        serializedObject.Update();
 
-        tile.sprite = (Sprite) EditorGUILayout.ObjectField("Sprite", tile.sprite, typeof(Sprite), false, GUILayout.Height(EditorGUIUtility.singleLineHeight));
-        tile.baseHealth = EditorGUILayout.IntField("Hardness", tile.baseHealth);
-        tile.colliderType = (Tile.ColliderType) EditorGUILayout.EnumPopup("Collider Type", Tile.ColliderType.Grid);
+        SerializedProperty _sprite = serializedObject.FindProperty("m_Sprite");
+        SerializedProperty _int = serializedObject.FindProperty("health");
+        // SerializedProperty _coll = serializedObject.FindProperty("m_ColliderType");
+
+        _sprite.objectReferenceValue = (Sprite) EditorGUILayout.ObjectField("Sprite", _sprite.objectReferenceValue, typeof(Sprite), false, GUILayout.Height(EditorGUIUtility.singleLineHeight));
+        _int.intValue = EditorGUILayout.IntField("Hardness", _int.intValue);
+        
+        serializedObject.ApplyModifiedProperties();
 
     }
 }
-

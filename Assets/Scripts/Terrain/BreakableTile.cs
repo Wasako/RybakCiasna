@@ -5,31 +5,29 @@ using UnityEngine.Tilemaps;
 
 public class BreakableTile : Tile
 {
-    public int baseHealth;
-    private int currentHealth;
+    public int health;
 
     public override bool StartUp(Vector3Int location, ITilemap tilemap, GameObject go)
     {
-        currentHealth = baseHealth;
         return true;
     }
 
     // return 1 if tile gets broken, 0 if doesnt
-    public bool MineBlock(int damage)
+    /* public bool MineBlock(int damage)
     {
-        // Debug.Log(currentHealth);
+        // Debug.Log(health);
 
-        currentHealth -= damage;
+        health -= damage;
 
-        if (currentHealth <=0)
+        if (health <=0)
         {
-            currentHealth = 0;
+            health = 0;
             // Debug.Log("mined");
             return true;
         }
         // Debug.Log("notmined");
         return false;
-    }
+    } */
 
     #if UNITY_EDITOR
     [UnityEditor.MenuItem("Assets/Create/Breakable Tile")]

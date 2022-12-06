@@ -9,6 +9,8 @@ public class TerrainHandler : MonoBehaviour
 
     private Tilemap thisTilemap;
     private Dictionary<TileBase, ItemScriptableObject> dropTable = new();
+    private Vector3Int currentPosition, previousPosition = Vector3Int.zero;
+    private int currentHealth;
     
 
     private void Start() {
@@ -39,21 +41,29 @@ public class TerrainHandler : MonoBehaviour
     // returns: true if a tile has been broken, false if no tilemap or no tile at position
     public bool DamageTile(Collision2D collision)
     {
-        Vector3Int _gridPosition;
-
-        TryFindTileFromCollision(collision, out bool isFound, out _gridPosition);
+        TryFindTileFromCollision(collision, out bool isFound, out currentPosition);
         
         if (!isFound) {
             return false;
         }
 
-        BreakableTile _currTile = thisTilemap.GetTile<BreakableTile>(_gridPosition);
-        if (_currTile.MineBlock(tempDrillPower))
+        if (currentPosition != previousPosition)
         {
-            AddToInventory(thisTilemap.GetTile(_gridPosition));
+            Debug.Log("new tile");
+            currentHealth = thisTilemap.GetTile<BreakableTile>(currentPosition).health;
+            previousPosition = currentPosition;
+        }
+
+        Debug.Log(currentHealth);
+        
+        currentHealth -= tempDrillPower;
+
+        if (currentHealth <= 0)
+        {
+            AddToInventory(thisTilemap.GetTile(currentPosition));
 
             // to set the tile in the tilemap to null - no sprite & collision
-            thisTilemap.SetTile(_gridPosition, null);
+            thisTilemap.SetTile(currentPosition, null);
             return true;
         }
 

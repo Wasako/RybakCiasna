@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02279d921383f6a429148c25f8a2da7b, type: 3}
   m_Name: plantBreakableTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 375233680, guid: 7ab951b77c0ba4647bb1ddb43198ec02, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

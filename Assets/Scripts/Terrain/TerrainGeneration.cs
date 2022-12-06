@@ -11,7 +11,7 @@ public class TerrainGeneration : MonoBehaviour
     // fields that are relevant to config of generation 
     [Header("Tilemap options")]
     [SerializeField] Tilemap terrainTilemap;
-    [SerializeField] Tile rockTile, oreTile, plantTile;
+    [SerializeField] Tile rockTile, oreTile, plantTile, goldTile;
 
     [Header("Size of generated map")]
     [Range(0, 1000)][SerializeField] int width = 10;
@@ -21,21 +21,29 @@ public class TerrainGeneration : MonoBehaviour
     [Tooltip("small - big chunks")][SerializeField] float smoothness = 20f;
     [Range(0, 100)][Tooltip("small - more filled")][SerializeField] int rockBorder = 40;
     [Range(0, 100)][Tooltip("small - more filled")][SerializeField] int oreBorder = 50;
+    [Range(0, 100)][Tooltip("small - more filled")][SerializeField] int goldBorder = 60;
     [Range(0, 100)][SerializeField] int plantChance = 50;
 
     float seed; // should not be visible or changeable
 
-    // for later
-    // BlockTableScriptableObject blocksTable = Resources.Load("Terrain/TerrainBlocksTable") as BlockTableScriptableObject;
+    // private Dictionary<TileBase, ItemScriptableObject> dropTable = new();
+
+    // do przepisania!! z użyciem SO czy tam innych rzeczy
+
 
     void Start()
     {
-        // generate terrain, if none is generated yet
-        if (!terrainTilemap.ContainsTile(rockTile)) {
-            seed = Random.Range(-1000000, 1000000);
-            GenerateTerrain();
-        }
-        
+        /*
+        // load the SO that contains info about blocks
+        BlockTableScriptableObject tempDropTable = Resources.Load("TerrainBlocksTable") as BlockTableScriptableObject;
+
+        // populate the drop table
+        foreach (BlockScriptableObject block in tempDropTable.blockTable)
+        {
+            dropTable.Add(block.tile, block.itemDrop);
+            // Debug.Log(block.tile + " " + block.itemDrop);
+        } 
+         */
     }
 
     private void Update()
@@ -73,13 +81,17 @@ public class TerrainGeneration : MonoBehaviour
                 int _perlinOutput = Perlin(x,y);
 
 
-                if (_perlinOutput > rockBorder && _perlinOutput < oreBorder)
+                if (_perlinOutput > rockBorder && _perlinOutput <= oreBorder)
                 {
                     terrainTilemap.SetTile(new Vector3Int(x, y, 0), rockTile);
                 }
-                else if (_perlinOutput > oreBorder)
+                else if (_perlinOutput > oreBorder && _perlinOutput <= goldBorder)
                 {
                     terrainTilemap.SetTile(new Vector3Int(x, y, 0), oreTile);
+                }
+                else if (_perlinOutput > goldBorder)
+                {
+                    terrainTilemap.SetTile(new Vector3Int(x, y, 0), goldTile);
                 }
                 else if (terrainTilemap.GetTile(new Vector3Int(x, y-1, 0)) == rockTile && Random.Range(0, 101) < plantChance)
                 {

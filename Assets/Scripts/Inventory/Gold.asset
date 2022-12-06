@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b7ef5b721cb654b80c3bfd54c126c3, type: 3}
   m_Name: Gold
   m_EditorClassIdentifier: 
-  Value: 0
-  Sprite: {fileID: 0}
+  InventoryName: 
+  Value: 10
+  Sprite: {fileID: 105337728, guid: 7ab951b77c0ba4647bb1ddb43198ec02, type: 3}

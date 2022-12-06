@@ -20,4 +20,17 @@ public class Harpoon : Attack
     {
         Destroy(gameObject, harpoonRange);
     }
+
+    private void OnCollisionEnter2D(Collision2D other) 
+    {
+        if (other.gameObject.GetComponent<TerrainHandler>()) // if collision is with the terrain
+        {
+            gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero; // stop all movement of a projectile
+            gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0f;
+            
+            // after colliding with a block, projectiles can't collide with each other
+            // layer 10 - NoCollisionHarpoon - has no collision with other Harpoons
+            gameObject.layer = 10; 
+        }
+    }
 }

@@ -52,6 +52,7 @@ public class Inventory : MonoBehaviour
     }
 
     private int ItemsCount => _itemsCount.Sum(x => x.Value);
+    public int getItemCount() {return ItemsCount;}
 
     private void Awake()
     {

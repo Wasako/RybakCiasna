@@ -8,18 +8,13 @@ public class SellPanel : MonoBehaviour
     public GameObject Slot;
     public GameObject inventoryObject;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         inventory = inventoryObject.GetComponent<Inventory>();
-        for(int i =0; i == inventory._itemsCount.Count; i++)
+
+        for(int i =0; i == inventory.getItemCount(); i++)
         {
             Instantiate(Slot, transform.position, Quaternion.identity);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

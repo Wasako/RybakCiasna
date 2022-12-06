@@ -8,11 +8,8 @@ public class DrillPseudoBullet : Harpoon
     {
         if (other.gameObject.GetComponent<TerrainHandler>()) // if collision is with the terrain
         {
-            // if tile was successfully broken
-            if (other.gameObject.GetComponent<TerrainHandler>().BreakTile(other))
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
+            other.gameObject.GetComponent<TerrainHandler>().DamageTile(other);
             
         }
     }

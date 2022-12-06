@@ -12,6 +12,18 @@ public class Inventory : MonoBehaviour
     private Dictionary<ItemScriptableObject, int> _itemsCount = new();
     public int money { get; private set; } = 50;
 
+    public void PrintInventory()
+    {
+        string _msg = "";
+
+        foreach (KeyValuePair<ItemScriptableObject, int> kvp in _itemsCount)
+        {
+            _msg = _msg + kvp.Key + ": "+ kvp.Value + " ";
+        }
+
+        Debug.Log(_msg);
+    }
+
     // Pays money if there is sufficient amount
     public bool TryBuy(int cost)
     {

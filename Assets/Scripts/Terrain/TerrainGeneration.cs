@@ -25,6 +25,9 @@ public class TerrainGeneration : MonoBehaviour
 
     float seed; // should not be visible or changeable
 
+    // for later
+    // BlockTableScriptableObject blocksTable = Resources.Load("Terrain/TerrainBlocksTable") as BlockTableScriptableObject;
+
     void Start()
     {
         // generate terrain, if none is generated yet

@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class TerrainHandler : MonoBehaviour
 {
+    private int tempDrillPower = 1;
 
     private Tilemap thisTilemap;
     private Dictionary<TileBase, ItemScriptableObject> dropTable = new();
@@ -21,7 +22,7 @@ public class TerrainHandler : MonoBehaviour
         }
 
         // load the SO that contains info about blocks
-        BlockTableScriptableObject tempDropTable = Resources.Load("Terrain/TerrainBlocksTable") as BlockTableScriptableObject;
+        BlockTableScriptableObject tempDropTable = Resources.Load("TerrainBlocksTable") as BlockTableScriptableObject;
 
         // populate the drop table
         foreach (BlockScriptableObject block in tempDropTable.blockTable)
@@ -31,12 +32,12 @@ public class TerrainHandler : MonoBehaviour
         }
         
         // unload to save memory or sth idk
-        Resources.UnloadAsset(tempDropTable);
+        // Resources.UnloadAsset(tempDropTable);
     }
 
     // arguments: collision with a tilemap collider
     // returns: true if a tile has been broken, false if no tilemap or no tile at position
-    public bool BreakTile(Collision2D collision)
+    public bool DamageTile(Collision2D collision)
     {
         Vector3Int _gridPosition;
 
@@ -46,11 +47,17 @@ public class TerrainHandler : MonoBehaviour
             return false;
         }
 
-        AddToInventory(thisTilemap.GetTile(_gridPosition));
+        BreakableTile _currTile = thisTilemap.GetTile<BreakableTile>(_gridPosition);
+        if (_currTile.MineBlock(tempDrillPower))
+        {
+            AddToInventory(thisTilemap.GetTile(_gridPosition));
 
-        // to set the tile in the tilemap to null - no sprite & collision
-        thisTilemap.SetTile(_gridPosition, null);
-        return true;
+            // to set the tile in the tilemap to null - no sprite & collision
+            thisTilemap.SetTile(_gridPosition, null);
+            return true;
+        }
+
+        return false;
 
     }
 

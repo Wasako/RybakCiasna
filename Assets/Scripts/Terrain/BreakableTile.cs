@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class BreakableTile : Tile
 {
-    public int baseHealth = 1;
+    public int baseHealth;
     private int currentHealth;
 
     public override bool StartUp(Vector3Int location, ITilemap tilemap, GameObject go)

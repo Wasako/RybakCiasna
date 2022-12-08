@@ -7,10 +7,15 @@ public class Shooting : MonoBehaviour
     public Transform firePoint;
     public GameObject harpoonPrefab;
     public float fireRate;
+    [SerializeField] private ParameterScriptableObject _fireRateParameter;
+    [SerializeField] private float _o2DrainRate;
 
     private float nextTimeToFire = 0f;
 
     public float shootingPower = 20f;
+
+    void Start() => fireRate = _fireRateParameter.Value; 
+
     // Update is called once per frame
     void Update()
     {
@@ -18,6 +23,9 @@ public class Shooting : MonoBehaviour
         {
             nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();
+
+            // Drain o2
+            GameController.Instance.DrainO2(_o2DrainRate);
         }
     }
 

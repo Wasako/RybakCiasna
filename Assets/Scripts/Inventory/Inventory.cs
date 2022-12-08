@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
     public event System.EventHandler InventoryUpdated;
     public static Inventory Instance;
 
-    [SerializeField] private ParameterScriptableObject _parameterScriptableObj;
+    [SerializeField] private ParameterScriptableObject _inventorySizeParameter;
     private Dictionary<ItemScriptableObject, int> _itemsCount = new();
     public int money { get; private set; } = 50;
 
@@ -36,7 +36,7 @@ public class Inventory : MonoBehaviour
     // Adds item if there is empty space for it
     public bool TryAddItem(ItemScriptableObject item)
     {
-        if (ItemsCount + 1 > _parameterScriptableObj.Value) return false; // Inventory full
+        if (ItemsCount + 1 > _inventorySizeParameter.Value) return false; // Inventory full
 
         // Increase item count or set it to one
         _itemsCount[item] = _itemsCount.TryGetValue(item, out int count) ? (count + 1) : 1;

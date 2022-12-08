@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    [SerializeField] private ParameterScriptableObject _playerSpeedParameter;
     [SerializeField] private Rigidbody2D playerRb;
 
     [Header("Movement and position variables")]
-    [SerializeField] private float playerMaxSpeed; // TODO in the future will be sucked from game cotroller script
+    private float playerMaxSpeed;
     private bool facingRight = true;
     Vector2 directionVector;
 
@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         SelectTool();
+        playerMaxSpeed = _playerSpeedParameter.Value;
     }
 
 
@@ -105,4 +106,3 @@ public class PlayerMovement : MonoBehaviour
 
 
 }
-

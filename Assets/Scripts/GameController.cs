@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class GameController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GameController : MonoBehaviour
     private Rigidbody2D _playerRB;
     private GameState _state;
     private float _o2Level;
+    private WaitForSeconds _wait = new(.1f);
 
     public enum GameState
     {
@@ -27,9 +29,11 @@ public class GameController : MonoBehaviour
             case (GameState.Shop, GameState.Underwater):
                 _playerRB = Instantiate(_playerPrefab, _spawnPosition, Quaternion.identity).GetComponent<Rigidbody2D>();
                 _o2Level = _o2Parameter.Value;
+                StartCoroutine(DrainO2Co());
                 // Hide shop UI
                 break;
             case (GameState.Underwater, GameState.Shop):
+                Destroy(_playerRB.gameObject);
                 // Show shop UI
                 break;
         }
@@ -48,14 +52,16 @@ public class GameController : MonoBehaviour
         Instance = this;
     }
 
-    private void Update()
+    private IEnumerator DrainO2Co()
     {
-        if (_state == GameState.Underwater)
+        while (_state == GameState.Underwater)
         {
-            _o2Level -= _idleO2DrainRate * Time.deltaTime; // Drain o2 over time
-            _o2Level -= _playerRB.velocity.magnitude * _movingO2DrainRate * Time.deltaTime; // Drain o2 when moving
-            
+            _o2Level -= _idleO2DrainRate; // Drain o2 over time
+            _o2Level -= _playerRB.velocity.magnitude * _movingO2DrainRate; // Drain o2 when moving
+
             if (_o2Level <= 0f) ChangeState(GameState.Shop); // Player dies of lack of o2
+
+            yield return _wait;
         }
     }
 }

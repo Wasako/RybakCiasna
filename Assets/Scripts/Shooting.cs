@@ -24,8 +24,8 @@ public class Shooting : MonoBehaviour
             nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();
 
-            // Drain o2
-            GameController.Instance.DrainO2(_o2DrainRate);
+            // Drain o2 - this causes an error, because it's 0 - I think it sould have a ParameterSO instead of a float?
+            // GameController.Instance.DrainO2(_o2DrainRate);
         }
     }
 

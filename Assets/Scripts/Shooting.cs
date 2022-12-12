@@ -14,7 +14,7 @@ public class Shooting : MonoBehaviour
 
     public float shootingPower = 20f;
 
-    void Start() => fireRate = _fireRateParameter.Value; 
+    void Start() => fireRate = _fireRateParameter.Value;
 
     // Update is called once per frame
     void Update()
@@ -24,8 +24,7 @@ public class Shooting : MonoBehaviour
             nextTimeToFire = Time.time + 1f / fireRate;
             Shoot();
 
-            // Drain o2 - this causes an error, because it's 0 - I think it sould have a ParameterSO instead of a float?
-            // GameController.Instance.DrainO2(_o2DrainRate);
+            GameController.Instance.DrainO2(_o2DrainRate);
         }
     }
 

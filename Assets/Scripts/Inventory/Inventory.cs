@@ -14,7 +14,7 @@ public class Inventory : MonoBehaviour
 
     public void PrintInventory()
     {
-        string _msg = "";
+        string _msg = "Current inventory: ";
 
         foreach (KeyValuePair<ItemScriptableObject, int> kvp in _itemsCount)
         {

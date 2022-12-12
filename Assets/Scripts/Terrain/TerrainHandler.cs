@@ -159,7 +159,7 @@ public class TerrainHandler : MonoBehaviour
         if (dropTable[brokenTile] != null)
         {
             FindObjectOfType<Inventory>().TryAddItem(dropTable[brokenTile]);
-            // FindObjectOfType<Inventory>().PrintInventory();
+            FindObjectOfType<Inventory>().PrintInventory();
         }
     }
 

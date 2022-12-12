@@ -22,6 +22,15 @@ public class GameController : MonoBehaviour
         Total
     }
 
+    private void Start()
+    {
+        _state = GameState.Underwater;
+        _playerRB = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+        _o2Level = _o2Parameter.Value;
+        StartCoroutine(DrainO2Co());
+        StartCoroutine(PrintO2Level());
+    }
+
     public void ChangeState(GameState newState)
     {
         switch (_state, newState)
@@ -62,6 +71,15 @@ public class GameController : MonoBehaviour
             if (_o2Level <= 0f) ChangeState(GameState.Shop); // Player dies of lack of o2
 
             yield return _wait;
+        }
+    }
+
+    public IEnumerator PrintO2Level()
+    {
+        while (_state == GameState.Underwater)
+        {
+            Debug.Log("current o2: " + _o2Level);
+            yield return new WaitForSeconds(1f);
         }
     }
 }

@@ -146,6 +146,8 @@ MonoBehaviour:
   firePoint: {fileID: 2048915543589148574}
   harpoonPrefab: {fileID: 5069830944409648793, guid: cc87d81235590344693e4a2ef763e60c, type: 3}
   fireRate: 2
+  _fireRateParameter: {fileID: 11400000, guid: 4ecfc2682fc6fae4d94b991422e4bc7d, type: 2}
+  _o2DrainRate: 0
   shootingPower: 30
 --- !u!1 &2048915543026696958
 GameObject:
@@ -196,8 +198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce99e02deec9fd94aa5231f44db2f05f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerSpeedParameter: {fileID: 11400000, guid: 97d62885c1b955349a71c4509663e420, type: 2}
   playerRb: {fileID: 2048915543026696956}
-  playerMaxSpeed: 300
   selectedTool: 0
 --- !u!50 &2048915543026696956
 Rigidbody2D:
@@ -403,6 +405,8 @@ MonoBehaviour:
   firePoint: {fileID: 2048915542731163668}
   harpoonPrefab: {fileID: 893791180528774847, guid: 923fb707b174d524fa889ea4bc594dce, type: 3}
   fireRate: 5
+  _fireRateParameter: {fileID: 11400000, guid: 4ecfc2682fc6fae4d94b991422e4bc7d, type: 2}
+  _o2DrainRate: 0
   shootingPower: 5
 --- !u!1 &2048915543589148561
 GameObject:

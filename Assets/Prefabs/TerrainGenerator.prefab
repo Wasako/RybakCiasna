@@ -52,7 +52,5 @@ MonoBehaviour:
   width: 100
   height: 100
   smoothness: 20
-  rockBorder: 42
-  oreBorder: 67
-  goldBorder: 60
-  plantChance: 50
+  rockBorder: 40
+  resourceBorder1: 65

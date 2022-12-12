@@ -5,12 +5,12 @@ using UnityEngine.Tilemaps;
 
 public class TerrainHandler : MonoBehaviour
 {
-    private int tempDrillPower = 1;
-
     private Tilemap thisTilemap;
     private Dictionary<TileBase, ItemScriptableObject> dropTable = new();
     private Vector3Int currentPosition, previousPosition = Vector3Int.zero;
-    private int currentHealth;
+    private int currentHealth, baseHealth;
+    private SpriteRenderer tileBreakSR;
+    private Sprite[] tileBreakSprites = new Sprite[3];
     
 
     private void Start() {
@@ -35,11 +35,20 @@ public class TerrainHandler : MonoBehaviour
         
         // unload to save memory or sth idk
         Resources.UnloadAsset(tempDropTable);
+
+        // assign the sprite renderer for sprites for tile breaking
+        tileBreakSR = gameObject.GetComponentInChildren<SpriteRenderer>();
+        tileBreakSR.enabled = false;
+
+        tileBreakSprites[0] = Resources.LoadAll("tile_breaking")[1] as Sprite;
+        tileBreakSprites[1] = Resources.LoadAll("tile_breaking")[2] as Sprite;
+        tileBreakSprites[2] = Resources.LoadAll("tile_breaking")[3] as Sprite;
+        
     }
 
     // arguments: collision with a tilemap collider
-    // returns: true if a tile has been broken, false if no tilemap or no tile at position
-    public bool DamageTile(Collision2D collision)
+    // returns: true if a tile has been broken, false if not
+    public bool DamageTile(Collision2D collision, int damage)
     {
 
         TryFindTileFromCollision(collision, out bool isFound, out currentPosition);
@@ -48,15 +57,7 @@ public class TerrainHandler : MonoBehaviour
             return false;
         }
 
-        if (currentPosition != previousPosition)
-        {
-            // Debug.Log("new tile");
-            currentHealth = thisTilemap.GetTile<BreakableTile>(currentPosition).health;
-        }
-
-        // Debug.Log(currentHealth);
-        previousPosition = currentPosition;
-        currentHealth -= tempDrillPower;
+        ApplyDamage(damage);
 
         if (currentHealth <= 0)
         {
@@ -64,11 +65,56 @@ public class TerrainHandler : MonoBehaviour
 
             // to set the tile in the tilemap to null - no sprite & collision
             thisTilemap.SetTile(currentPosition, null);
+            RemoveBreakingSprite();
             return true;
         }
 
+        DisplayBreakingSprite();
+
         return false;
 
+    }
+
+    private void ApplyDamage(int damage)
+    {   
+        if (currentPosition != previousPosition)
+        {
+            // Debug.Log("new tile");
+            baseHealth = thisTilemap.GetTile<BreakableTile>(currentPosition).health;
+            currentHealth = baseHealth;
+        }
+
+        // Debug.Log(currentHealth);
+        previousPosition = currentPosition;
+        currentHealth -= damage;
+    }
+
+    private void DisplayBreakingSprite()
+    {
+        // display correct sprite
+        tileBreakSR.enabled = true;
+        tileBreakSR.transform.position = currentPosition + thisTilemap.tileAnchor;
+
+        float currentHealthPercent = (float) currentHealth / (float) baseHealth;
+        // Debug.Log(currentHealthPercent);
+
+        if (currentHealthPercent >= 0.65f)
+        {
+            tileBreakSR.sprite = tileBreakSprites[0];
+        }
+        else if (currentHealthPercent >=0.32f)
+        {
+            tileBreakSR.sprite = tileBreakSprites[1];
+        }
+        else
+        {
+            tileBreakSR.sprite = tileBreakSprites[2];
+        }
+    }
+
+    private void RemoveBreakingSprite()
+    {
+        tileBreakSR.enabled = false;
     }
 
     private void TryFindTileFromCollision(Collision2D collision, out bool isFound, out Vector3Int returnPosition)
@@ -113,7 +159,7 @@ public class TerrainHandler : MonoBehaviour
         if (dropTable[brokenTile] != null)
         {
             FindObjectOfType<Inventory>().TryAddItem(dropTable[brokenTile]);
-            FindObjectOfType<Inventory>().PrintInventory();
+            // FindObjectOfType<Inventory>().PrintInventory();
         }
     }
 

@@ -34,6 +34,6 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 2
-  health: 3
+  health: 10
   generationMethod: 2
   generationValue: 10

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefabs/Main Camera.prefab.meta
 guid: ff8408ce785265545bd72ffafb3513bf
+========
+guid: 25658b4955a56e44a8725b86bf798278
+>>>>>>>> dev:Assets/Prefabs/GameContoller.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

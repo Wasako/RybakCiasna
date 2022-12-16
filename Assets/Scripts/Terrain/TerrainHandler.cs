@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+// this script handles breaking blocks of terrain, and adding corresponding items to inventory
+
 public class TerrainHandler : MonoBehaviour
 {
     private Tilemap thisTilemap;

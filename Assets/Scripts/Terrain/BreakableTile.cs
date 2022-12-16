@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+// custom tile that has health and more parameters
+
 public class BreakableTile : Tile
 {
     public int health;
     public int generationMethod; // 1 - from noise with border, 2 - by chance, 3 - plant
-    public float generationValue; // chance
+    public float generationValue; // chance or border
+
     // public int minDepth, maxDepth;
 
     /* public override bool StartUp(Vector3Int location, ITilemap tilemap, GameObject go)

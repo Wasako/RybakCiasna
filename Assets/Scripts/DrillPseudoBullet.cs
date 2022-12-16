@@ -25,7 +25,6 @@ public class DrillPseudoBullet : Attack
     {
         if (other.gameObject.GetComponent<TerrainHandler>()) // if collision is with the terrain
         {
-            // int _tempDamage = gameObject.GetComponent<Attack>().damage;
             Destroy(gameObject);
             other.gameObject.GetComponent<TerrainHandler>().DamageTile(other, 1);
             

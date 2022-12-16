@@ -46,6 +46,7 @@ public class GameController : MonoBehaviour
                 // Show shop UI
                 break;
         }
+        _state = newState;
     }
 
     public void DrainO2(float drainAmount) => _o2Level -= drainAmount;
@@ -65,8 +66,8 @@ public class GameController : MonoBehaviour
     {
         while (_state == GameState.Underwater)
         {
-            _o2Level -= _idleO2DrainRate; // Drain o2 over time
-            _o2Level -= _playerRB.velocity.magnitude * _movingO2DrainRate; // Drain o2 when moving
+            _o2Level -= _idleO2DrainRate;                                   // Drain o2 over time
+            _o2Level -= _playerRB.velocity.magnitude * _movingO2DrainRate;  // Drain o2 when moving
 
             if (_o2Level <= 0f) ChangeState(GameState.Shop); // Player dies of lack of o2
 
@@ -82,4 +83,6 @@ public class GameController : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
     }
+
+    public float GetO2() {return _o2Level;}
 }

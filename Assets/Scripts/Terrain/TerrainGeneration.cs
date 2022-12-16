@@ -11,11 +11,11 @@ using UnityEngine.Tilemaps;
 // bruh
 // to sie wkopałam w algorytmikę
 
-// this is a mess I will fix it
+// this is a mess I will fix it after showcase
 
 public class TerrainGeneration : MonoBehaviour
 {
-    // fields that are relevant to config of generation 
+    // fields that are relevant to config of generation
     [Header("Tilemap options")]
     [SerializeField] private Tilemap terrainTilemap;
     [SerializeField] BreakableTile rockTile, oreTile, plantTile, goldTile;
@@ -34,61 +34,14 @@ public class TerrainGeneration : MonoBehaviour
 
     float seed; // should not be visible or changeable
 
-    private List<TileBase> type1Tiles = new();
+    /* private List<TileBase> type1Tiles = new();
     private List<BreakableTile> type2Tiles = new();
-    private List<BreakableTile> type3Tiles = new();
-
-
-    private void Start()
-    {
-        /* 
-        // load the SO that contains info about blocks
-        BlockTableScriptableObject tempTileTable = Resources.Load("TerrainBlocksTable") as BlockTableScriptableObject;
-
-        // populate the tables
-        foreach (BlockScriptableObject block in tempTileTable.blockTable)
-        {
-            switch (block.tile.generationMethod)
-            {
-                case 1:
-                    type1Tiles.Add(block.tile);
-                    Debug.Log("type 1 " + block.tile.name);
-                    break;
-
-                case 2:
-                    type2Tiles.Add(block.tile);
-                    Debug.Log("type 2 " + block.tile.name);
-
-                    break;
-
-                case 3:
-                    type3Tiles.Add(block.tile);
-                    Debug.Log("type 3 " + block.tile.name);
-
-                    break;
-
-                default:
-                    Debug.Log("tile does not have generation method: " + block.tile.name);
-                    break;
-            }
-        } 
-        
-        // unload when not needed
-        Resources.UnloadAsset(tempTileTable);
-
-
-        // make this better when I figure out depth levels
-        if (type1Tiles.Count > 3)
-        {
-            Debug.LogWarning("too many resource blocks");
-        }
-         */
-    }
+    private List<BreakableTile> type3Tiles = new(); */
 
     private void Update()
     {
-        // keys to quickly generate, clear terrain
-        /* if (Input.GetKeyDown(KeyCode.I))
+        // keys to quickly generate, clear terrain - for testing
+        if (Input.GetKeyDown(KeyCode.I))
         {
             ButtonNewTerrain();
         }
@@ -99,13 +52,19 @@ public class TerrainGeneration : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             ButtonClearTerrain();
-        } */
+        }
     }
 
     private void OnDrawGizmos() {
         // displays a gizmo of the size and position of terrain that is/ will be generated
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(new Vector3(width/2, height/-2, 0), new Vector3(width, height, 0));
+    }
+
+    public void GetTerrainSize(out float _height, out float _width)
+    {
+        _height = height;
+        _width = width;
     }
     
     public void GenerateTerrain()
@@ -194,3 +153,49 @@ public class TerrainGeneration : MonoBehaviour
         GenerateTerrain();
     }
 }
+
+        /*  ================ code to fix later!!!! in Start()
+
+
+
+        // load the SO that contains info about blocks
+        BlockTableScriptableObject tempTileTable = Resources.Load("TerrainBlocksTable") as BlockTableScriptableObject;
+
+        // populate the tables
+        foreach (BlockScriptableObject block in tempTileTable.blockTable)
+        {
+            switch (block.tile.generationMethod)
+            {
+                case 1:
+                    type1Tiles.Add(block.tile);
+                    Debug.Log("type 1 " + block.tile.name);
+                    break;
+
+                case 2:
+                    type2Tiles.Add(block.tile);
+                    Debug.Log("type 2 " + block.tile.name);
+
+                    break;
+
+                case 3:
+                    type3Tiles.Add(block.tile);
+                    Debug.Log("type 3 " + block.tile.name);
+
+                    break;
+
+                default:
+                    Debug.Log("tile does not have generation method: " + block.tile.name);
+                    break;
+            }
+        } 
+        
+        // unload when not needed
+        Resources.UnloadAsset(tempTileTable);
+
+
+        // make this better when I figure out depth levels
+        if (type1Tiles.Count > 3)
+        {
+            Debug.LogWarning("too many resource blocks");
+        }
+         */

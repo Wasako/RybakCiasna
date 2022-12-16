@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2050903227470701166}
   m_Layer: 0
   m_Name: TerrainGenerator
-  m_TagString: Untagged
+  m_TagString: TerrainGenerator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,6 +51,6 @@ MonoBehaviour:
   goldTile: {fileID: 11400000, guid: 9b1f094615e781544b1bce3cae4aec5a, type: 2}
   width: 100
   height: 100
-  smoothness: 20
-  rockBorder: 40
-  resourceBorder1: 65
+  smoothness: 15
+  rockBorder: 52
+  resourceBorder1: 73

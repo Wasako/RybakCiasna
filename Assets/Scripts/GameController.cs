@@ -9,11 +9,15 @@ public class GameController : MonoBehaviour
     [SerializeField] private Vector3 _spawnPosition;
     [SerializeField] private float _idleO2DrainRate;
     [SerializeField] private float _movingO2DrainRate;
+    [SerializeField] private TerrainGeneration _mainTerrainGen;
 
     private Rigidbody2D _playerRB;
     private GameState _state;
     private float _o2Level;
     private WaitForSeconds _wait = new(.1f);
+    private GameObject _HUD;
+    private GameObject _ShopUI;
+    private Camera _mainCamera;
 
     public enum GameState
     {
@@ -24,11 +28,16 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        _state = GameState.Underwater;
+        // assign all the necessary references
         _playerRB = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
-        _o2Level = _o2Parameter.Value;
-        StartCoroutine(DrainO2Co());
-        StartCoroutine(PrintO2Level());
+        _HUD = GameObject.Find("HUD");
+        _ShopUI = GameObject.Find("Shop UI");
+        _mainTerrainGen = GameObject.FindObjectOfType<TerrainGeneration>();
+        _mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+
+        // set state to underwater
+        _state = GameState.Shop;
+        ChangeState(GameState.Underwater);
     }
 
     public void ChangeState(GameState newState)
@@ -36,17 +45,39 @@ public class GameController : MonoBehaviour
         switch (_state, newState)
         {
             case (GameState.Shop, GameState.Underwater):
-                _playerRB = Instantiate(_playerPrefab, _spawnPosition, Quaternion.identity).GetComponent<Rigidbody2D>();
-                _o2Level = _o2Parameter.Value;
-                StartCoroutine(DrainO2Co());
-                // Hide shop UI
+                SetupUnderwater();
                 break;
             case (GameState.Underwater, GameState.Shop):
-                Destroy(_playerRB.gameObject);
-                // Show shop UI
+                SetupShop();
                 break;
         }
         _state = newState;
+    }
+
+    private void SetupUnderwater()
+    {
+        _ShopUI.gameObject.SetActive(false); // Hide shop UI
+        _mainTerrainGen.ButtonNewTerrain(); // generate new random terrain with random seed
+
+        if (_playerRB == null) // if player needs to be spawned
+        {
+            _playerRB = Instantiate(_playerPrefab, _spawnPosition, Quaternion.identity).GetComponent<Rigidbody2D>(); // spawn the player
+            _mainCamera.gameObject.transform.SetPositionAndRotation(new Vector3(_spawnPosition.x, _spawnPosition.y + 5f, -10f), Quaternion.identity); // reset camera position
+            _mainCamera.gameObject.GetComponent<CameraMovement>().TargetPlayer(); // reset target of camera to player
+        }
+
+        _o2Level = _o2Parameter.Value; // start the o2 meter
+        StartCoroutine(DrainO2Co());
+        _HUD.gameObject.SetActive(true); // show the HUD
+    }
+
+    private void SetupShop()
+    {
+        Destroy(_playerRB.gameObject);
+        _mainTerrainGen.ButtonClearTerrain(); // clear terrain
+        _HUD.gameObject.SetActive(false); // hide HUD
+        StopCoroutine(DrainO2Co());
+        _ShopUI.gameObject.SetActive(true); // Show shop UI
     }
 
     public void DrainO2(float drainAmount) => _o2Level -= drainAmount;
@@ -64,6 +95,8 @@ public class GameController : MonoBehaviour
 
     private IEnumerator DrainO2Co()
     {
+        yield return _wait;
+
         while (_state == GameState.Underwater)
         {
             _o2Level -= _idleO2DrainRate;                                   // Drain o2 over time
@@ -75,14 +108,5 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public IEnumerator PrintO2Level()
-    {
-        while (_state == GameState.Underwater)
-        {
-            Debug.Log("current o2: " + _o2Level);
-            yield return new WaitForSeconds(1f);
-        }
-    }
-
-    public float GetO2() {return _o2Level;}
+    public float GetO2() {return _o2Level<=0 ? 0 : _o2Level;}
 }

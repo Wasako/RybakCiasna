@@ -114,7 +114,7 @@ public class TerrainHandler : MonoBehaviour
         }
     }
 
-    private void RemoveBreakingSprite()
+    public void RemoveBreakingSprite()
     {
         tileBreakSR.enabled = false;
     }
@@ -161,7 +161,6 @@ public class TerrainHandler : MonoBehaviour
         if (dropTable[brokenTile] != null)
         {
             FindObjectOfType<Inventory>().TryAddItem(dropTable[brokenTile]);
-            FindObjectOfType<Inventory>().PrintInventory();
         }
     }
 

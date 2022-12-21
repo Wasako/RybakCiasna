@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _o2Parameter: {fileID: 11400000, guid: 296746d2e122b0c499ea24ca96fe44bc, type: 2}
   _playerPrefab: {fileID: 2048915543026696958, guid: e362790a048add046818812cbd85f0d4, type: 3}
-  _spawnPosition: {x: 48, y: 0, z: 0}
+  _spawnPosition: {x: 50, y: 1, z: 0}
   _idleO2DrainRate: 0.01
   _movingO2DrainRate: 0.02
+  _mainTerrainGen: {fileID: 0}

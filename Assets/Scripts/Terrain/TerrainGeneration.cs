@@ -138,6 +138,7 @@ public class TerrainGeneration : MonoBehaviour
     public void ButtonClearTerrain()
     {
         terrainTilemap.ClearAllTiles();
+        terrainTilemap.GetComponentInChildren<SpriteRenderer>().enabled = false;
     }
 
     public void ButtonNewTerrain()

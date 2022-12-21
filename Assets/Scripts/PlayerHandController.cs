@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PlayerHandController : MonoBehaviour
 {
-    public Camera cam;
+    private Camera cam;
     Vector3 mousePos;
 
-    // Start is called before the first frame update
+    private void Start() {
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+    }
 
 
     // Update is called once per frame

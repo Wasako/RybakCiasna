@@ -2,27 +2,21 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
+public class InventoryEventArgs : System.EventArgs
+{
+    public ItemScriptableObject item;
+    public int newValue;
+}
+
 public class Inventory : MonoBehaviour
 {
     public event System.EventHandler MoneyUpdated;
-    public event System.EventHandler InventoryUpdated;
+    public event System.EventHandler<InventoryEventArgs> InventoryUpdated;
     public static Inventory Instance;
 
     [SerializeField] private ParameterScriptableObject _inventorySizeParameter;
     private Dictionary<ItemScriptableObject, int> _itemsCount = new();
-    public int money { get; private set; } = 50;
-
-    public void PrintInventory()
-    {
-        string _msg = "Current inventory: ";
-
-        foreach (KeyValuePair<ItemScriptableObject, int> kvp in _itemsCount)
-        {
-            _msg = _msg + kvp.Key + ": "+ kvp.Value + " ";
-        }
-
-        Debug.Log(_msg);
-    }
+    public int money { get; private set; } = 0;
 
     // Pays money if there is sufficient amount
     public bool TryBuy(int cost)
@@ -41,14 +35,23 @@ public class Inventory : MonoBehaviour
         // Increase item count or set it to one
         _itemsCount[item] = _itemsCount.TryGetValue(item, out int count) ? (count + 1) : 1;
 
-        InventoryUpdated?.Invoke(this, System.EventArgs.Empty);
+        var itemArgs = new InventoryEventArgs();
+        itemArgs.item = item;
+        itemArgs.newValue = _itemsCount[item];
+
+        InventoryUpdated?.Invoke(this, itemArgs);
         return true;
     }
 
     public void DropItem(ItemScriptableObject item)
     {
         _itemsCount[item] = _itemsCount.TryGetValue(item, out int count) ? Mathf.Max(count - 1, 0) : 0;
-        InventoryUpdated?.Invoke(this, System.EventArgs.Empty);
+
+        var itemArgs = new InventoryEventArgs();
+        itemArgs.item = item;
+        itemArgs.newValue = _itemsCount[item];
+
+        InventoryUpdated?.Invoke(this, itemArgs);
     }
 
     private int ItemsCount => _itemsCount.Sum(x => x.Value);
@@ -72,7 +75,30 @@ public class Inventory : MonoBehaviour
         money += item.Value * (_itemsCount.TryGetValue(item, out int count) ? count : 0);
         _itemsCount.Remove(item);
 
-        InventoryUpdated?.Invoke(this, System.EventArgs.Empty);
+        // set up the parameters for InventoryUpdated event
+        var itemArgs = new InventoryEventArgs();
+        itemArgs.item = item;
+        itemArgs.newValue = 0;
+
+        // invoke events
+        InventoryUpdated?.Invoke(this, itemArgs);
         MoneyUpdated?.Invoke(this, System.EventArgs.Empty);
+    }
+
+    public void SellAll()
+    {
+        if (ItemsCount == 0) {return;}
+
+        List<ItemScriptableObject> tempList = new();
+
+        foreach (KeyValuePair<ItemScriptableObject, int> kvp in _itemsCount)
+        {
+            tempList.Add(kvp.Key);
+        }
+
+        foreach (ItemScriptableObject item in tempList)
+        {
+            ConvertToMoney(item);
+        }
     }
 }

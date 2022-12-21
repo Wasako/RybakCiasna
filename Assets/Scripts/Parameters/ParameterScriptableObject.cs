@@ -15,7 +15,7 @@ public class ParameterScriptableObject : ScriptableObject
     public int Level { get; private set; } = _startLevel;
     public int UpgradeCost => _upgradeCost;
 
-    public void Upgrade()
+    public void Upgrade()  // fix: only allow upgrade when level <= max level!!!!!!
     {
         // Check if there is enough money to buy upgrade
         if (!Inventory.Instance.TryBuy(_upgradeCost)) return;

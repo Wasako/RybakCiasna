@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public GameObject player;
+    [SerializeField] private GameObject player;
     private Vector3 playerPosition;
     TerrainGeneration _terrain;
     float xMin, xMax, yMin, yMax; // camera bounds
@@ -12,6 +12,7 @@ public class CameraMovement : MonoBehaviour
     private void Start() 
     {
         _terrain = GameObject.FindGameObjectWithTag("TerrainGenerator").GetComponent<TerrainGeneration>();
+        player = GameObject.FindGameObjectWithTag("Player");
 
         if (!_terrain)
         {
@@ -20,6 +21,11 @@ public class CameraMovement : MonoBehaviour
         }
 
         CalculateCameraBounds(out xMin , out xMax, out yMin , out yMax);
+    }
+
+    public void TargetPlayer()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void CalculateCameraBounds(out float xMin , out float xMax, out float yMin , out float yMax)

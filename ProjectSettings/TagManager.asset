@@ -40,15 +40,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Background
     uniqueID: 991832601
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: Terrain
     uniqueID: 1288743385
     locked: 0
   - name: TerrainOverlay
     uniqueID: 4099191347
+    locked: 0
+  - name: Player
+    uniqueID: 103991087
     locked: 0

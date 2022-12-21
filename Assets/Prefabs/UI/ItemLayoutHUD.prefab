@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 6166289428823198294}
   - component: {fileID: 1419404525386599706}
   m_Layer: 5
-  m_Name: ItemLayout 1
+  m_Name: ItemLayoutHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

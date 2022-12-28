@@ -381,6 +381,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shop UI
       objectReference: {fileID: 0}
+    - target: {fileID: 4037409758049648940, guid: 2dd5d57e0e64c284981ad30af6c4c3f0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4887507908948241765, guid: 2dd5d57e0e64c284981ad30af6c4c3f0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -465,6 +469,10 @@ PrefabInstance:
       propertyPath: itemLayout
       value: 
       objectReference: {fileID: 1550850099992971931, guid: 66d38389c76d2bb42baf83a24758e5bf, type: 3}
+    - target: {fileID: 8763721428021120443, guid: 2dd5d57e0e64c284981ad30af6c4c3f0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dd5d57e0e64c284981ad30af6c4c3f0, type: 3}
 --- !u!1001 &1288670906
@@ -19074,14 +19082,6 @@ PrefabInstance:
       propertyPath: itemLayout
       value: 
       objectReference: {fileID: 1550850099992971931, guid: 3c21630a378e9ff40a722d1b29cf098a, type: 3}
-    - target: {fileID: 8669215268963397131, guid: d91afd0b1c86c8d49bd9676ff8f096bd, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 1012.2415
-      objectReference: {fileID: 0}
-    - target: {fileID: 8669215268963397131, guid: d91afd0b1c86c8d49bd9676ff8f096bd, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -21.135254
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d91afd0b1c86c8d49bd9676ff8f096bd, type: 3}
 --- !u!1 &1678348216

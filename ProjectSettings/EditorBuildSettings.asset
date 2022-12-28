@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Showcase.unity
     guid: 7ce6675e3f23a5745a2501a825ced08a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Ricki_gameUI.unity
     guid: 8e0034edd39c71647bd20226a7f48b4a
   m_configObjects: {}

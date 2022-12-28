@@ -101,4 +101,22 @@ public class Inventory : MonoBehaviour
             ConvertToMoney(item);
         }
     }
+
+    public bool SendCurrentInventory()
+    {
+        if (ItemsCount == 0) {return false;}
+
+        List<ItemScriptableObject> tempList = new();
+
+        foreach (KeyValuePair<ItemScriptableObject, int> kvp in _itemsCount)
+        {
+            var itemArgs = new InventoryEventArgs();
+            itemArgs.item = kvp.Key;
+            itemArgs.newValue = kvp.Value;
+
+            InventoryUpdated?.Invoke(this, itemArgs);
+        }
+
+        return true;
+    }
 }

@@ -14,10 +14,14 @@ public class InventoryDisplay : MonoBehaviour
     private void Start() {
         inventoryObj = GameObject.FindObjectOfType<Inventory>();
         inventoryObj.InventoryUpdated += UpdateInventory; // subscribe to InventoryUpdated event
+
+        inventoryObj.SendCurrentInventory();
+
     }
 
-        private void UpdateInventory(object sender, InventoryEventArgs eventArgs)
+    private void UpdateInventory(object sender, InventoryEventArgs eventArgs)
     {
+
         // after receiving event, update the private dictionary with new data
         if (eventArgs.newValue == 0)
         {
@@ -27,6 +31,7 @@ public class InventoryDisplay : MonoBehaviour
         {
             inventory[eventArgs.item] = eventArgs.newValue;
         }
+
 
         // update the HUD: (this is a bad method to do this but it'll work for the showcase)
         // 1. clear all existing items in HUD
@@ -45,6 +50,7 @@ public class InventoryDisplay : MonoBehaviour
 
         // PrintInventory();
     }
+    
 
     private void PrintInventory()
     {

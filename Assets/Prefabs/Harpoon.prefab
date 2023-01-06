@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82ea1cd10aa672b408c3288bf6ac4b15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 1
   damageType: 
   attackRate: 0
   malee: 0

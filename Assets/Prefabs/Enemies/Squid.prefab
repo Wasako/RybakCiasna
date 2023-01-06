@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 6785524802365030231}
   - component: {fileID: 2650992446554055664}
   - component: {fileID: 826347458388444243}
-  m_Layer: 0
+  - component: {fileID: -3608506536711611144}
+  m_Layer: 11
   m_Name: Squid
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1155877889
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 1671473632, guid: d00788f8323cb70418df454f976e18a2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -101,3 +102,16 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.003}
   m_Size: {x: 0.22, y: 0.38}
   m_Direction: 0
+--- !u!114 &-3608506536711611144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049385251774442686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10bfbf23ca5af11419fb4f8cb41956b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 5

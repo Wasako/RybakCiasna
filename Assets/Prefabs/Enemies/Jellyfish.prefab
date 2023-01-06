@@ -11,9 +11,12 @@ GameObject:
   - component: {fileID: 8411555466637182993}
   - component: {fileID: 15623382007084104}
   - component: {fileID: 4462123550207938572}
-  m_Layer: 0
+  - component: {fileID: -7515698397079091124}
+  - component: {fileID: -8634477487225660240}
+  - component: {fileID: 5856538165920651287}
+  m_Layer: 11
   m_Name: Jellyfish
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1155877889
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -1990367886, guid: 0a4e24f5967eba4449c13e7ad64278a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -111,3 +114,55 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.66, y: 1.3605998}
   m_EdgeRadius: 0
+--- !u!50 &-7515698397079091124
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7202354756236412164}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 2000
+  m_LinearDrag: 10
+  m_AngularDrag: 10
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &-8634477487225660240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7202354756236412164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae6aec01743604843aeab5f512e6fe11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 0
+  movementSpeed: 0
+  safePlayerDistance: 0
+  detectionPlayerDistance: 0
+  rb: {fileID: 0}
+  travelDistance: 0.75
+--- !u!114 &5856538165920651287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7202354756236412164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10bfbf23ca5af11419fb4f8cb41956b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 3

@@ -24,7 +24,7 @@ public abstract class BaseEnemyAi : MonoBehaviour
     [Tooltip("The AI's Rigidbody2D component")]
     protected Rigidbody2D rb;
 
-    void Start()
+    public void Start()
     {
         GameObject player = GameObject.Find("Player");
         if (player != null)

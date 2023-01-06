@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Weapon
   - TerrainGenerator
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Terrain
   - Harpoon
   - NoCollisionHarpoon
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -54,4 +55,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 103991087
+    locked: 0
+  - name: Enemy
+    uniqueID: 3139089407
     locked: 0

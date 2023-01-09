@@ -218,7 +218,7 @@ namespace Custom2D.Lights
 
         private void RecalculateMatrix()
         {
-            matrix = Matrix4x4.TRS(transform.position, Quaternion.identity, Vector3.one * maxRadius);
+            matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one * maxRadius);
         }
 
         private void UpdateRadius()

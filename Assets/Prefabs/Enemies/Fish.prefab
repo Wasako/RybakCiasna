@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3593429437984004479}
   - component: {fileID: 7775301261463797544}
   - component: {fileID: 6348660398010177243}
+  - component: {fileID: -2482460540899291876}
+  - component: {fileID: 6096973780291314669}
   m_Layer: 11
   m_Name: Fish
   m_TagString: Enemy
@@ -125,3 +127,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 2
+--- !u!114 &-2482460540899291876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5915649628297677379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f15a7d73d371f8459014fe16e8f0f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 0
+  movementSpeed: 0
+  safePlayerDistance: 0
+  detectionPlayerDistance: 0
+  rb: {fileID: 0}
+  travelDistance: 0.5
+--- !u!50 &6096973780291314669
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5915649628297677379}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 5
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

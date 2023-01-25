@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Linq;
 
 // This script handles the generation of terrain, settings for it,
 // and control of it from the inspector
@@ -12,6 +13,7 @@ using UnityEngine.Tilemaps;
 // to sie wkopałam w algorytmikę
 
 // this is a mess I will fix it after showcase
+// copium
 
 public class TerrainGeneration : MonoBehaviour
 {
@@ -28,6 +30,11 @@ public class TerrainGeneration : MonoBehaviour
     [Tooltip("small - big chunks")][SerializeField] private float smoothness = 20f;
     [Range(0, 100)][Tooltip("small - more filled")][SerializeField] private int rockBorder = 40;
     [Range(0, 100)][Tooltip("small - more filled")][SerializeField] private int resourceBorder1 = 50;
+
+    [Header("Enemies")]
+    [SerializeField] private Transform enemiesParent;
+    [SerializeField] private Object enemy1;
+    [SerializeField] private Object enemy2;
     
     // [Range(0, 100)][Tooltip("small - more filled")][SerializeField] private int resourceBorder2 = 60;
     // [Range(0, 100)][SerializeField] int plantChance = 50;
@@ -100,28 +107,50 @@ public class TerrainGeneration : MonoBehaviour
         {
             for (int y = height*-1; y < 0; y++)
             {
-                if (terrainTilemap.GetTile(new Vector3Int(x, y, 0)) == rockTile )
+                // plants
+                if (terrainTilemap.GetTile(new Vector3Int(x, y-1, 0)) == rockTile && 
+                    terrainTilemap.GetTile(new Vector3Int(x, y+1, 0)) == null && 
+                    Random.Range(0, 101) < plantTile.generationValue)
                 {
-                    // plants
-                    if (terrainTilemap.GetTile(new Vector3Int(x, y, 0)) == rockTile && 
-                        terrainTilemap.GetTile(new Vector3Int(x, y+1, 0)) == null && 
-                        Random.Range(0, 101) < plantTile.generationValue)
-                    {
-                        terrainTilemap.SetTile(new Vector3Int(x, y, 0), plantTile);
-                    }
+                    terrainTilemap.SetTile(new Vector3Int(x, y, 0), plantTile);
+                }
 
-                    // gems
-                    if ((terrainTilemap.GetTile(new Vector3Int(x, y, 0)) == rockTile || 
-                        terrainTilemap.GetTile(new Vector3Int(x, y, 0)) == oreTile) &&
-                        Random.Range(0, 101) < goldTile.generationValue)
-                    {
-                        terrainTilemap.SetTile(new Vector3Int(x, y, 0), goldTile);
-                    }
+                // gems
+                if ((terrainTilemap.GetTile(new Vector3Int(x, y, 0)) == rockTile || 
+                    terrainTilemap.GetTile(new Vector3Int(x, y, 0)) == oreTile) &&
+                    Random.Range(0, 101) < goldTile.generationValue)
+                {
+                    terrainTilemap.SetTile(new Vector3Int(x, y, 0), goldTile);
+                }
+                
+
+            }
+        }
+
+        BoundsInt _currentArea;
+        TileBase[] _tileArray = new TileBase[9];
+        int _counter = 0;
+
+        // enemies
+        for (int y = -3; y > height*-1; y-=3)
+        {
+            for (int x = 0; x < width-2; x+=3)
+            {
+                _currentArea = new BoundsInt(x, y, 0, 3, 3, 1);
+                _tileArray = terrainTilemap.GetTilesBlock(_currentArea);
+
+                if (_tileArray.All(x => x == null) && Random.Range(0, 101) <= 10)
+                {
+                    Instantiate(enemy1, new Vector3(_currentArea.center.x, _currentArea.center.y, 0), enemiesParent.rotation, enemiesParent);
+                    _counter++;
                 }
 
             }
         }
+
+        Debug.Log("enemies spawned: " + _counter);
     }
+    
 
     // function that calculates an output from Perlin noise 
     int Perlin(int xCoord, int yCoord) {
@@ -139,18 +168,28 @@ public class TerrainGeneration : MonoBehaviour
     {
         terrainTilemap.ClearAllTiles();
         terrainTilemap.GetComponentInChildren<SpriteRenderer>().enabled = false;
+
+
+        foreach (Transform child in enemiesParent)
+        {
+            # if UNITY_EDITOR
+            GameObject.DestroyImmediate(child.gameObject);
+            # else
+            GameObject.Destroy(child.gameObject);
+            #endif
+        }
     }
 
     public void ButtonNewTerrain()
     {
-        terrainTilemap.ClearAllTiles();
+        ButtonClearTerrain();
         seed = Random.Range(-1000000, 1000000);
         GenerateTerrain();
     }
 
     public void ButtonSameTerrain()
     {
-        terrainTilemap.ClearAllTiles();
+        ButtonClearTerrain();
         GenerateTerrain();
     }
 }

@@ -43,6 +43,6 @@ public class DirectionAndSpeed : HasDirection
 
     private void UpdateVelocity()
     {
-        rigid.velocity = direction * speed;
+        if(rigid != null) rigid.velocity = direction * speed;
     }
 }

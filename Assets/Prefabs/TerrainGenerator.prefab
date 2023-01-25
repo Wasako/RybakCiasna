@@ -54,3 +54,6 @@ MonoBehaviour:
   smoothness: 15
   rockBorder: 52
   resourceBorder1: 73
+  enemiesParent: {fileID: 0}
+  enemy1: {fileID: 111690264667996529, guid: ddb43b202b084364d98c840cd66eb707, type: 3}
+  enemy2: {fileID: 7480234197436198825, guid: f37df0c288681414cbc00f526d53b3d4, type: 3}

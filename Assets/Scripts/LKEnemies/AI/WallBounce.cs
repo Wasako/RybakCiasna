@@ -19,7 +19,7 @@ public class WallBounce : MonoBehaviour
 
         var normal = contacts[0].normal;
 
-        velocity.Direction = Vector2.Reflect(velocity.Direction, normal);
+        if (velocity != null) velocity.Direction = Vector2.Reflect(velocity.Direction, normal);
     }
 }
 

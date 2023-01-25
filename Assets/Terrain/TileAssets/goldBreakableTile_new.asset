@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02279d921383f6a429148c25f8a2da7b, type: 3}
   m_Name: goldBreakableTile_new
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -195947283, guid: f1e0cda8aa52f5a459fcadcaa3bd653e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 45dfebc7c19dba047b533ade49200c53, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

@@ -72,7 +72,7 @@ MonoBehaviour:
   attackRate: 0
   malee: 0
   lastAttackTime: 0
-  harpoonRange: 0.2
+  harpoonRange: 1
 --- !u!58 &9149243771317509927
 CircleCollider2D:
   m_ObjectHideFlags: 0

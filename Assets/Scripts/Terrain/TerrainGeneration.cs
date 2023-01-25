@@ -139,9 +139,14 @@ public class TerrainGeneration : MonoBehaviour
                 _currentArea = new BoundsInt(x, y, 0, 3, 3, 1);
                 _tileArray = terrainTilemap.GetTilesBlock(_currentArea);
 
-                if (_tileArray.All(x => x == null) && Random.Range(0, 101) <= 10)
+                if (_tileArray.All(x => x == null) && Random.Range(0, 101) <= 5)
                 {
                     Instantiate(enemy1, new Vector3(_currentArea.center.x, _currentArea.center.y, 0), enemiesParent.rotation, enemiesParent);
+                    _counter++;
+                }
+                else if (_tileArray.All(x => x == null) && Random.Range(0, 101) <= 5)
+                {
+                    Instantiate(enemy2, new Vector3(_currentArea.center.x, _currentArea.center.y, 0), enemiesParent.rotation, enemiesParent);
                     _counter++;
                 }
 

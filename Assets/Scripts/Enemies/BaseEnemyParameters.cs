@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class BaseEnemyParameters : MonoBehaviour
 {
-    [SerializeField]
-    public int hp;
+    [SerializeField] private int hp;
 
     public void TakeDamage(int dmg)
     {
         hp = hp - dmg;
+        StartCoroutine(Flash());
         if (hp <= 0)
         {
-            gameObject.SetActive(false);
-            Destroy(gameObject);
+            Destroy(transform.parent.gameObject);
         }
+    }
+
+    private IEnumerator Flash()
+    {
+        Color defaultColor = gameObject.GetComponentInParent<SpriteRenderer>().color;
+        gameObject.GetComponentInParent<SpriteRenderer>().color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        gameObject.GetComponentInParent<SpriteRenderer>().color = defaultColor;
     }
 }

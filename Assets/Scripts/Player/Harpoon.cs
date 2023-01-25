@@ -32,11 +32,12 @@ public class Harpoon : Attack
             // layer 10 - NoCollisionHarpoon - has no collision with other Harpoons
             gameObject.layer = 10; 
         }
+    }
 
+    private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag.Equals("Enemy"))
         {
             other.gameObject.GetComponent<BaseEnemyParameters>().TakeDamage(damage);
-            gameObject.SetActive(false);
             Destroy(gameObject);
         }
     }
